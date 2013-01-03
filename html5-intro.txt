@@ -1,0 +1,23 @@
+# HTML5 Introduction
+
+HTML5 will be the new standard for HTML, it is the result of the cooperation between the World Wide Web Consortium (W3C) and the Web Hypertext Application Technology Working Group (WHATWG). 
+
+The goals of HTML5 are:
+
+1. New features are based on HTML, CSS, DOm and JavaScript
+2. Reduce dependencies on external plugins e.g. Flash
+3. Improved error handling
+4. Favor markup over scripting (when possible)
+5. Device independence
+6. Development process should be publicly visible
+
+
+## New features
+
+1. Canvas elements
+2. Video and Audio elements
+3. Local storage
+4. Content specific elements like article, footer, header, nav and section
+5. New form controls e.g. calendar, date, email, url and search
+
+

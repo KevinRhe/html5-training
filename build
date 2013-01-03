@@ -1,0 +1,43 @@
+#!/bin/bash
+
+clean
+echo "" > book.txt
+rm -fvr tempbook
+
+cat preface.txt >> book.txt
+cat html-basic.txt >> book.txt
+cat html5-intro.txt >> book.txt
+cat structural-elements.txt >> book.txt
+cat javascript.txt >> book.txt
+cat client-side-javascript.txt >> book.txt
+cat canvas.txt >> book.txt
+cat svg >> book.txt
+cat jquery.txt >> book.txt
+cat typescript.txt >> book.txt
+cat coffeescript.txt >> book.txt
+cat audio.txt >> book.txt
+cat video.txt >> book.txt
+cat geolocation.txt >> book.txt
+cat webworkers.txt >> book.txt
+cat websockets.txt >> book.txt
+cat server-sent.txt >> book.txt
+cat local-storage.txt >> book.txt
+cat tools.txt >> book.txt
+
+cat appendix.txt >> book.txt
+cat index.book >> book.txt
+cat bib.book >> book.txt
+
+pandoc -N --chapters --listings -o html5-shooters.tex book.txt
+
+cat preamble.book > tempbook
+cat html5-shooters.tex >> tempbook
+echo "\end{document}" >> tempbook
+
+cp tempbook html5-shooters.tex
+pdflatex html5-shooters.tex
+makeindex html5-shooters.idx
+pdflatex html5-shooters.tex
+
+clean
+rm -fvr tempbook

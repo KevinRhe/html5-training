@@ -1,0 +1,397 @@
+# Client-side JavaScript
+
+JavaScript is quite ubiquotous nowadays. You can find it in quite a few places, on mobile apps, server side programs, glue codes for Java programs etc. The most common place you will find JavaScript code is within web pages (HTML pages).
+
+
+~~~
+<!DOCTYPE html> 
+
+<html>
+<body>
+
+<script>document.write("Hello JavaScript");</script>
+
+</body>
+</html>
+
+~~~
+
+JavaScript lives inside the *script* tag of an HTML page, in this example, the JavaScript code is inline, meaning it is written on the same source file where the HTML codes are also written in. 
+
+~~~
+<!DOCTYPE html>
+
+<html>
+<body>
+
+<script src="hellojavascript.js"></script>
+
+</body>
+</html>
+
+~~~
+
+In this example, the script element has an src attribute which is given a value "hellojavascript.js"---this is a JavaScript source file. You can write whatever legal JavaScript statements in that source file.
+
+The code document.write() , when executed, will erase the whole content of the HTML page (specifically the whole of the body element) and then replace it with whatever you supplied as parameter to the write() method—that's probably not what you would like to do, so be careful using that command, you normally see that code on introductory codes of JavaScript on the browser so that you can quickly get a tactile feel of JS coding. In order to produce dynamic HTML with JavaScript you will need to know a little bit about the DOM (Document Object Model).
+
+An HTML page is made up of tags (elements) which in turn can contain other elements. If element1 contains element2 and element3, the relationship between these elements is that; element2 and element3 are child nodes of element1, another way of saying it is that, element1 is the parent node of element2 and element3. If you try to picture the relationship of HTML elements to one another, it might resemble something like a tree structure. The trunk, the main node is the \verb|<html>| element, and then it will have branches (the \verb|<head> and <body>|) elements. The head and body elements can in turn contain other elements like script, style, input, textarea, options, canvas etc.
+
+The document object model allows you programmatic access to these elements and their attributes. Navigating the DOM is an essential skill of a JavaScript programmer. Below is a rough pictorial representation of DOM (Level 0)
+
+\begin{figure} [htpb]
+    \centering
+    \includegraphics[width=0.85\textwidth]{images/dom-level-0.pdf}
+    \caption{DOM Level 0}
+    \label{jdbc}
+\end{figure}
+
+Each node in the DOM is an object, so you can use the dot notation to reference each element. The root element of the DOM is the window object, this is the most global space in client-side JavaScript. It has many child nodes, you have already seen one of them in action a while back, the document object. When we wrote document.write(), we actually meant window.document.write(), but we don't have the write the window object explicitly.
+
+I already mentioned that each node in the DOM is an object, which means if you want to do something to one of elements, you need to know their methods so you can do something meaningful to them.
+
+~~~
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>     
+    </head>
+    <body>
+        <div id="watch">
+    
+        </div>
+
+        <script>
+
+        var out = document.getElementById("watch");
+        out.innerHTML = "Hello JavaScript";
+
+        </script>
+
+    </body>
+</html>
+~~~
+
+The document object has a method---which you will use quite a lot---the getElementById(). It is used to locate an HTML element that has a specific ID. When the element is found, a programmatic reference to that object is returned. After that, you can call the methods of the HTML element. In the example above, a div named "watch" was defined in the HTML. You can use document.getElementById("watch") to obtain an object reference to that div just like what we did on the sample code. The innerHTML is a property of any div element, this is a read-write property so you can pretty much use it like this
+
+~~~
+var x = document.getElementById("watch");
+x.innerHTML = "Writing to the div";  // writes to the div
+
+var y = x.innerHTML; // reading the runtime content of the div
+~~~
+
+Let's re-arrange the codes in our sample
+
+~~~
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>     
+    </head>
+    <body>
+        <script>
+
+        var out = document.getElementById("watch");
+        out.innerHTML = "Hello JavaScript";
+
+        </script>
+
+        <div id="watch">
+    
+        </div>
+    </body>
+</html>
+~~~
+
+In this version, the script comes before the div definition, if you run this code, you will see nothing---because there will be an error. The variable out will contain null. The reason for this is because we tried to obtain an object reference to a div element which does not exist yet. The div "watch" must be defined and loaded in the DOM before we can obtain a programming reference to it. It is time to step back a little bit and try to get some more understanding of how the browser, DOM, and JavaScript works.
+
+\begin{figure} [htpb]
+    \centering
+    \includegraphics[width=0.65\textwidth]{images/dom-javascript-rendering.pdf}
+    \caption{How DOM is processed}
+    \label{jdbc}
+\end{figure}
+
+
+When a web page is received by browser, it will go to work by scanning through all the HTML elements in the page. It will be interrupted shortly when it encounters elements that have an src attribute, because that attribute means that whatever information follows the src, it is not part of the current document being rendered---the browser will make another roundtrip requesting the resource from the server, then coming back again. This is the reason why sometimes, the browser seems to load for a very long time, because it is trying to complete all the elements in the web page. If the element has an src attribute, it will be fetched before the browser can complete rendering the complete DOM.
+
+The other occassion when the browser will stop rendering the DOM is when it encounters the \verb|<script>| element. JavaScript has the ability to alter the DOM, that is why the browser needs to suspend operation when a JavaScript code is running. When the script is done, the DOM rendering can resume.
+
+You need to keep this interplay between the DOM, JavaScript and the browser in mind so that you always know the state of the browser and the DOM before you accessing any element of the DOM.
+
+This does not mean though that you have to position your scripts on very select places of the HTML page just to ensure that your code is synchronized with the HTML elements. Not only is that an ardous task, it is also bad form. What we need right now is to use a little bit of callbacks.
+
+Callbacks are simply functions in JavaScripts, you probably know them better as events. Each element of the DOM have built-in events that you can already use. Let's start with the **window** object, we'll rewrite the previous code sample using some events of the window object.
+
+~~~
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title> 
+        <script>
+
+        window.onload = function(){
+            var x = document.getElementById("watch");
+            x.innerHTML = "Writing to the DIV watch";
+        }
+
+        </script>   
+    </head>
+    <body>
+
+        <div id="watch">
+    
+        </div>
+
+    </body>
+</html>
+~~~
+
+This is a lot different now, the script element is on the head portion of the HTML page, obviously none of the HTML elements have been rendered at this point, but code works just fine. This is because we have overriden the onload event of the window* object. By assigning a callback function to the onload member of window, we are in fact telling it which function to execute when all the elements of DOM have already been loaded, because at that point, the DOM is pretty stable, all of the elements would have been rendered.
+
+## Event Programming
+
+The basic idea is when a user does something, e.g. click, right-click, types something, hovers the mouse over an area, your code will do something meaningful, useful or cool (or all of the above). These useful codes reside on your JavaScript functions. Hence, the trick is to bind a function (a function that you define) to an established event of an HTML element.
+
+Events can be bound to JavaScript functions in a couple of ways.
+
+### Binding the event using the attribute of an HTML element
+
+~~~
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title></title>
+        <script>
+
+        function btnClick() {
+            var x = document.getElementById("writetome");
+            x.innerHTML = "Hi World";
+        }
+
+        </script>
+
+    </head>
+    <body>
+        <form>
+        <input type="button" value="Click me to see" onclick="btnClick()">
+        </form>
+
+        <div id="writetome"></div>
+    </body>
+</html>
+~~~
+
+The onClick attribute of the input element is assigned a name of the JavaScript function. When the user clicks the button, btnClick() will be called. This is fine if you are experimenting on JavaScript, but this style of coding is obstrusive, it sullies the HTML code.
+
+### Using callbacks programmatically
+
+
+~~~
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script>
+
+    window.onload = function(){
+        var btn = document.getElementById("btn");
+        btn.onclick = function(){
+            document.getElementById("writetome").innerHTML = "Hi World";
+        }
+    }
+
+
+    </script>
+</head>
+<body>
+    <form>
+    <input type="button" value="Click me to see" id="btn"/>
+    </form>
+
+    <div id="writetome"></div>
+</body>
+</html>
+~~~
+
+The second version of our code is a bit cleaner. There are no programming instructions on the input element, just styling and bare instructions. The onclick event was bound to the button entirely inside the **script** element. All of our logic are wrapped inside the window.onload callback because we need the DOM to have completely rendered before we get a reference to both the div and the button input element.
+
+Most input elements of the DOM have the onclick event, you can even use it on document object itself, if you want to.
+
+Below is a list of the common events you might need for JavaScript programming. The list is not exhaustive, nor is it complete. It is listed only to get you started. 
+
+1. **onclick** - works on lots of HTML elements, there is no ondoubleclick or onrightclick, that is handled using some other trickeries of the event object. I will get to that, but not now
+2. **onmousedown, onmousemove, onmouseover, onmouseup** - the events are pretty self explanatory, you can probably guess already when these events are triggered, no need to spell it out. This event works on lots of elements too, like the onClick
+3. **onchange** -- usually found on input, select and textarea elements. This event is triggered when the value of the element has changed and it has lost the focus
+4. **onkeyup, onkeydown, onkeypress** - if you want to handle keyboard events
+
+### Sample code, onkeyup
+
+~~~
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script>
+
+    window.onload = function(){
+
+        var txtobj = document.forms[0].elements["txtarea1"];
+
+        txtobj.onkeyup = function(){
+            document.getElementById("writetome").innerHTML = txtobj.value;
+        }
+    }
+    </script>
+</head>
+<body>
+
+<form name="objform">
+    <textarea name="txtarea1" rows="10" cols="100">
+
+    </textarea>
+
+    <p>
+</form>
+<div id="writetome">
+    This text will change
+</div>
+</body>
+</html>
+
+~~~
+
+Everytime the text inside the textarea element changes, we get the value of textarea (txtobj.value) then we assign that to the innerHTML property of the div
+
+
+### Handling the right click
+
+~~~
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+
+    <style>
+        #thearea {
+            border:4px solid gray;
+            width: 500px;
+            height: 200px;
+        }
+        #watch {
+            border:5px solid green;
+            padding-top: 50px;
+            width:500px;
+        }
+    </style>
+
+    <script>
+
+    window.onload = function(){
+
+        var objarea = document.getElementById("thearea");
+
+        objarea.oncontextmenu = function(){
+            return false;
+        }
+
+        objarea.onmousedown = function(){
+
+            var watch = document.getElementById("watch");
+            var x = event.clientX;
+            var y = event.clientY;
+            var msg = "X : " + x + " | Y: " + y;
+
+            switch(event.which){
+                case 1: // left click
+                    watch.innerHTML = "Left " + msg;
+                    break; 
+                case 2: // middle click
+                    watch.innerHTML = "Midle " + msg;
+                    break;
+                case 3: // right click
+                    watch.innerHTML = "Right " + msg;
+                    break;
+            }
+        }
+
+    }
+
+    </script>
+</head>
+<body>
+
+<div id="thearea">Right click inside the box. Then right click outside 
+the box. The context menu will not be triggered inside this div
+</div>
+<p>
+<div id="watch"></div>
+</body>
+</html>
+~~~
+
+
+We need to override the **oncontextmenu** function so that the default context menu will not kick in. The key to detecting which mouse button was used to click is the **which** property of the event object---note though that there have been inconsistencies on the values of which, sometime in the past, I remember 0 = left click, 1 = middle and 2 = right; Do your proper testing, you have been warned.
+
+### Tracking the mouse position
+
+The X and Y position of the mouse is always reported by the event object, in the following code sample, the mouse position is captured during the **onmousemove** of a div element.
+
+
+~~~
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+
+    <style>
+        #thearea {
+            border:4px solid gray;
+            width: 500px;
+            height: 200px;
+        }
+        #watch {
+            border:5px solid green;
+            padding-top: 50px;
+            width:500px;
+        }
+    </style>
+
+    <script>
+
+    window.onload = function(){
+
+        var objarea = document.getElementById("thearea");
+
+        objarea.onmousemove = function(){
+
+            var xpos = event.clientX;
+            var ypos = event.clientY;
+            var msg = "X : " + xpos + " | Y : " + ypos;
+
+            document.getElementById("watch").innerHTML = msg; 
+        }
+    }
+
+    </script>
+</head>
+<body>
+
+<div id="thearea">Just hover your mouse inside box</div>
+<p>
+<div id="watch"></div>
+</body>
+</html>
+~~~
+
+The event object has two members, clientX and clientY which corresponds to exact position of mousepointer at the time of capture. You need to be careful when using event.clientX and event.clientY*, these may not be the same from one browser to another--which is why its worthwhile using JavaScript libraries that takes away our worries of cross-browser coding, like JQuery; which is coming up next.
+
+
+
+

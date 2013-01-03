@@ -1,0 +1,79 @@
+\begin{thebibliography}{99}
+
+\bibitem{learning-html5}
+	James L Williams,
+	\emph{Learning HTML 5}.
+	Addison Wesley,
+	2011.
+	
+\bibitem{definitive-javascript}
+	David Flanagan,
+	\emph{JavaScript, The definitive guide}.
+	O'Reilly,
+	2006.
+	
+\bibitem{modern-javascript}
+	Larry Ullman
+	\emph{Modern Javascript, Development and Design}
+	O'Reilly
+	
+\bibitem{foundation-html5-canvas}
+	Rob Hawkes
+	\emph{Foundation HTML5 Canvas}
+	O'Reilly
+	2010
+	
+\bibitem{javascript-patterns}
+	Stroyan Stephanov
+	\emph{Javascript Patterns}
+	O'Reilly
+	2010
+	
+\bibitem{javascript-goodparts}
+	Douglas Crockford
+	\emph{Javascript, The Good Parts}
+	O'Reilly
+	
+\bibitem{html5-canvas}
+	Steve Fulton {\&} Jeff Fulton
+	\emph{HTML 5 Canvas}
+	O'Reilly
+	year
+	
+\bibitem{small-coffeescript}
+	Steve Mcaw
+	\emph{The Small CoffeeScript Book}
+	
+\bibitem{typescript-spec}
+	Microsoft
+	\emph{TypeScript Language Specification v.08}
+	Microsoft
+	2012.
+	
+\bibitem{designing-ria}
+	Matthew David
+	\emph{HTML5 Desining Rich Internet Applications}
+	Focal Press
+	2010.
+
+\bibitem{html5-rocks}
+	\emph{HTML 5 Rocks}
+	http://html5rocks.com
+	
+	
+\bibitem{html5-specification}
+	W3C
+	\emph{HTML 5 Specification}
+	W3C http://www.w3.org/TR/html5/
+	
+\bibitem{html-introduction}
+		W3C Schools
+		\emph{HTML Basic}
+		http://www.w3schools.com/html/default.asp
+
+\bibitem{ecma-262}
+		ECMA International
+		\emph{ECMAScript 262 Specification}
+		http://www.ecma-international.org/publications/standards/Ecma-262.htm
+	
+\end{thebibliography}

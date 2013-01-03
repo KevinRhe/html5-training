@@ -1,0 +1,7 @@
+# HTML5 Canvas
+
+HTML5 Canvas is one of new additions to the HTML specification. By now, it must have occured to you already that HTML5 does not refer to a single thing, it refers to a lot of things. There are markups or tags and a bunch of APIs---which are all exposed via the use of JavaScript. HTML5 Canvas is one of those of lots of things under the HTML5 umbrella. 
+
+The canvas is drawable region within the HTML document. You can draw pixels anywhere you like in this region, you can color it up too. It is simple to use the canvas, the API contains methods which allow you to produce some drawing primitives like arc, text and rectangle. These drawing APIs are all accessible via JavaScript.
+
+

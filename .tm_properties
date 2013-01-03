@@ -1,0 +1,5 @@
+[*.txt] 
+fileType = "text.html.markdown" 
+
+[Documents/*.txt] 
+fileType = "text.plain" 

@@ -1,0 +1,18 @@
+# script to clean build files for pdf transformation
+# usage: sh clean.sh or clean.sh
+
+rm -fvr *.log
+rm -fvr *.out
+rm -fvr *.tex
+rm -fvr *.aux
+rm -fvr *.toc
+rm -fvr *.mtc*
+rm -fvr *.maf
+rm -fvr *.ilg
+rm -fvr *.ind
+rm -fvr *.ilg
+rm -fvr *.tdo
+rm -fvr *.idx
+
+echo "" > book.txt
+

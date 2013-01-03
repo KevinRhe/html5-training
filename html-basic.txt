@@ -1,0 +1,87 @@
+
+# HTML Basics
+
+\marginpar{What is HTML}HTML stands \emph{Hypertext Markup language}. It is not a programming language like Java, Javascript or C++ are programming languages, but it is a language nonetheless. A markup language consists of pair of tags. These tags are instructions to whatever will read HTML document. Browsers do read HTML documents, so the markup is intended (mostly) for browsers. There are other consumers of HTML documents but for our purposes we will consider only browsers. 
+
+
+Markup tags are instructions, a processor like a web browser will know what to do with the markups, e.g. \verb|<h1>Heading One</h1>| tells the browser the text "Heading One" should be rendered differently from the default font and weight of the paragraph body, it should be rendered with more weight and size emphasis. HTML documents can contain both marked up and non-marked up (regular text)
+
+HTML documents are ubiquituous, they have a wide range of use, from documentation, apps etc, but most of the time, HTML documents are used for building web pages.
+
+
+\marginpar{HTML tags}HTML tags are special words written in between a pair of angle brackets; the less than and greater than signs e.g. \verb |<emph>emphasis</emph>|. They come in pairs, notice that the other tag has forward slash? That is how to close a tag. Not all browsers will be strict in processing the HTML tags, some browsers will let you get away with improperly written tags, but that is bad form---strive to always write proper HTML. HTML tags are also known as HTML elements, whenever you see the term HTML element, it means exactly the same thing as an HTML tag
+
+
+\marginpar{HTML files are just text files}HTML documents are text files. They can be created by any editor capable of processing plain text files such as Notepad, TextEdit, nano, pico, GEdit. While some people swear that a plain text editor is the only thing you need to create web pages, I cannot endorse that. When you start working with non-trivial projects, a decent and capable editor will go a long way. While you haven't settled on your own editor, this list can you started
+
+
+1. **CoffeeCup**  http://www.coffeecup.com/free-editor/
+2. **HTML Kit** http://www.htmlkit.com
+3. **NotePad++**  http://notepad-plus-plus.org
+4. **PSPad** http://www.pspad.com
+5. **Scite**  http://opensource.ebswift.com/SciTEInstaller/
+6. **eTextEditor** - http://e-texteditor.en.softonic.com 
+7. **Smultron** (Commercial Software, for OSX)
+8. **TextMate** (Commercial Software, for OSX)
+9. **Sublime2** (Commercial Software, for OSX)
+10. **Geany** (Linux software)
+
+There are others like Aptana Studio, Netbeans etc, but they are more than just plain editors, they are IDEs (Integrated Development Environment). You can try them too, but you need to invest time in learning how to use them properly. A plain text editor is low on footprint and low on ceremony, just get up and go.
+
+
+## Structure of an HTML document
+
+\begin{figure}[H]
+\begin{lstlisting}[caption=HTML Document Structure]
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	
+	<body>
+	</body>
+</html>
+
+\end{lstlisting}
+\end{figure}
+
+The \verb|<html>| element is the outermost element in a document, there can only be one pair of this element inside an HTML source file.  There are two elements that can be nested inside the **html tag**, the \verb|<head> and the <body>| elements
+
+All the visible things that you want to show on an HTML page goes to the **body** element. For example, ordered lists, un-ordered lists, headings, paragraphs, tables. 
+
+Things written inside the **head** element will not be visible on the HTML page. That is not to say they are less important. Some of the things you may find on the **head** element are *script*--for embedding Javascript codes, *link*--for CSS amongst other things, *title* etc 
+
+The \verb|<!DOCTYPE>| is not an HTML tag, it is an instruction to the processor (the web browser) that contains which version of HTML the document is using. This declaration is necessary because there is more than one version of HTML. The HTML technology has been evolving for the past two decades. The current version of HTML is 5, but it doesn't mean that all web pages are now using HTML version 5. Some web pages are still coded using previous versions of HTML, that is the reason why the browser needs to know which version it is dealing with.  The following are the versions of HTML:
+
+1. **HTML** - 1991
+2. **HTML+** - 1993
+3. **HTML 2.0** - 1995
+4. **HTML 3.2** - 1997
+5. **HTML 4.01** - 1999
+6. **XHTML 1.0** - 2000
+7. **HTML5** - 2012
+8. **XHTML5** - 2013
+
+The W3C site keeps an updated list of HTML versions ^[HTML versions http://www.w3schools.com/html/html_intro.asp]. 
+
+The way to declare a DOCTYPE in HTML 5 is \verb|<!DOCTYPE html>|, you can already use this now. Current browsers will look at this doctype and switch to standards mode. What this means is that the HTML5 pages you will write today can last for a very long time. 
+
+If you want to look at doctype declarations for other versions of HTML, W3C keeps an updated page on DOCTYPES. ^[DOCTYPE declarations http://www.w3schools.com/tags/tag_doctype.asp]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
