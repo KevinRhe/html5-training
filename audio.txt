@@ -1,2 +1,174 @@
 # HTML5 Audio
 
+Before HTML5, audio files were played in the web page using browser plugins, there were lots of them. Some plugins would support some browsers, and some other plugins would support some other browsers.
+
+In HTML5, the <audio> element is intended to play audio files on the web page without the aid of plugins.
+
+The basic declarations for HTML5 audio is illustrated in the code below
+
+\begin{figure}[H]
+\begin{lstlisting}[caption=HTML5 audio element]
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <audio controls>
+      <source src='aria.mp3' type='audio/mpeg'>      
+        Your browser does not support the audio element <br/>
+        of HTML5
+    </audio> 
+  </body>
+</html>
+
+\end{lstlisting}
+\end{figure}
+
+The structure for **<audio>** element is straightforward, inside the audio tag, is **<source>** tag, the attributes of the source tag is where you specify the URL and the type for the audio file. 
+
+HTML5 is still nascent (even at the time of this writing), there are three audio formats currently supported (not by all browsers though). The table below summarizes support of each browser on the three audio formats, OGG Vorbis, WAV and MPEG
+
+\clearpage
+
+\begin{figure}
+\begin{tabularx}{\textwidth}{X l l l}
+\textbf{BROWSER} &			
+\textbf{MP3} & 
+\textbf{WAV} & 
+\textbf{OGG}		\\
+\hline
+IE9+				& yes		& no		& yes	\\
+Chrome			& yes		& yes	& yes	\\
+FireFox			& no		& yes	& yes	\\
+Safari			& yes		& yes	& no	 \\
+Opera				& no		& yes	& yes	\\
+\bigskip
+\vspace{10mm}
+\end{tabularx}
+\caption{Browser support}
+\end{figure}
+
+
+\marginpar{One source file per <audio> element}Each **<audio>**, ideally, should contain only one **<source>** element, although nothing prevents you from embedding more than one *source* element inside an *audio* element, only the first source element defined will be visible (and playable) in the web page. 
+
+If you intend to place more than one audio file in a web page, you should consider defining more than one *audio* element, once for each *source*
+
+
+\begin{figure}[H]
+\begin{lstlisting}[caption=HTML5 audio element]
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <audio controls>
+      <source src='aria.mp3'>
+      <source src='jewish-life.m4a'>
+      
+        Your browser does not support the audio element <br/>
+        of HTML5
+      
+    </audio>
+    
+    <audio controls>
+      <source src='jewish-life.m4a'>
+        Your browser does not support the audio element <br/>
+        of HTML5
+    </audio>    
+  </body>
+</html>
+
+\end{lstlisting}
+\end{figure}
+
+By far, you have seen that by including the **controls** argument in the *audio* element, you can display the default audio controls to allow the user to manage the playback of the audio files. \marginpar{autoplay}If you change the **controls** to **autoplay**, the audio file will begin playback as soon as the webpage is loaded. Be CAUTIOUS about using this, this can potentially interfere with the experience of the users, especially those who rely on audible feedback for page navigation; not to mention, autoplaying audio files is downright annoying.
+
+There are other attributes that you can use with the *audio* element, below is the list of these attributes, two of which you have already seen from earlier examples.
+1. **autoplay** - Sets the media clip to play upon creation or query whether it is set to autoplay. 
+2. **loop** - Returns true if the clip will restart upon ending or sets the clip to loop (or notloop).3. **currentTime** - Returns the current time in seconds that has elapsed since the beginning of theplayback. Sets currentTime to seek to a specific position in the clip playback. 
+4. **controls** - Shows or hides the user controls, or queries whether they are currently visible.5. **volume** - Sets the audio volume to a relative value between 0.0 and 1.0, or queries the value of the same.6. **muted** - Mutes or unmutes the audio, or determines the current mute state.7. **autobuffer** - Tells the player whether or not to attempt to load the media file before playback is initiated. If the media is set for auto-playback, this attribute is ignored.
+
+## Controlling audio programmatically
+
+The **<audio>** element is already usable out of box. With just a few simple declarations, you can an sound dimension to your web pages. Like many other things in HTML5, **<audio>** can be programmed, via *JavaScript* of course. 
+
+
+\begin{figure}[H]
+\begin{lstlisting}[caption=HTML5 programming audio]
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>HTML5 Audio Demo</title>
+    
+    <style>
+    #button {
+      width: 100px;
+      height: 100px;
+      border: 2px solid gray;
+    }
+    
+    #watch {
+      border: 1px dotted gray;
+    }
+    </style>
+    
+    <script>
+    
+    window.onload = function() {
+
+      var button = document.getElementById("button");
+      var clip = document.getElementById("clip");
+      var watch = document.getElementById("watch");
+    
+      button.onclick = function() {
+        var duration = clip.duration;
+        var ended = clip.ended;
+        var filename = clip.currentSrc;
+    
+        clip.play();
+      
+        watch.innerHTML = "Duration : " + duration + "<br/>" +
+         "Ended : " + ended + "<br/>" + "Filename : " + filename;
+      }       
+    }  
+
+    </script>
+    
+  </head>
+  <body>
+    
+    <div id='button'>
+      play
+    </div>
+    
+    <audio id='clip'>
+      <source src='aria.mp3'>
+      <source src='jewish-life.m4a'>
+      
+        Your browser does not support the audio element <br/>
+        of HTML5
+      
+    </audio>
+    
+    <div id='watch'>
+      Hello
+    </div>
+    
+  </body>
+</html>
+
+\end{lstlisting}
+\end{figure}
+ 
+
+
+
+
+
+

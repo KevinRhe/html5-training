@@ -21,6 +21,7 @@
 \usepackage[tight]{shorttoc}
 %\usepackage{ulem}
 \usepackage{tocloft}
+\usepackage{tabularx}
 
 \usepackage{titlesec,color}
 \definecolor{gray75}{gray}{0.35}
@@ -89,7 +90,7 @@
 \lstset{
     tabsize=2,
     keywordstyle=\color{blue}\bfseries,
-    numbers=left,
+%    numbers=left,
     language=html,
     basicstyle=\footnotesize\ttfamily,
     showstringspaces=false,
@@ -116,7 +117,7 @@
 
 
 \title{HTML 5 Shooters}
-\date{January 2013	}
+\date{November 2012	}
 \author{Ted Hagos\\
 	\texttt {ted@thelogbox.com}
 	}
