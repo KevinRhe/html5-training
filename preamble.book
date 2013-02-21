@@ -23,6 +23,7 @@
 \usepackage{tocloft}
 \usepackage{tabularx}
 
+
 \usepackage{titlesec,color}
 \definecolor{gray75}{gray}{0.35}
 \newcommand{\hsp}{\hspace{5pt}}
@@ -99,7 +100,7 @@
     }
 
 % PAGE DIMENSIONS
-\usepackage[top=2cm, bottom=3.3cm, left=4cm, right=4.2cm]{geometry}
+\usepackage[top=2cm, bottom=3.3cm, left=3cm, right=4.2cm]{geometry}
 \linespread{1.1}
 
 
@@ -119,7 +120,8 @@
 \title{HTML 5 Shooters}
 \date{November 2012	}
 \author{Ted Hagos\\
-	\texttt {ted@thelogbox.com}
+	\texttt{ted@thelogbox.com} \\
+    \texttt{v 0.1}
 	}
 \maketitle
 
